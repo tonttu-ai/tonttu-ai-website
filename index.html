@@ -86,6 +86,34 @@
             const cookieBanner = document.querySelector('.cookie-banner');
             const acceptButton = cookieBanner.querySelector('button');
 
+            // Multi-language support for the cookie banner
+            const messages = {
+                en: {
+                    text: 'This website uses cookies to enhance your experience and analyze website traffic. You can accept to enjoy the best functionality. Learn more in our <a href="#" style="color: #FFFFFF; text-decoration: underline;">privacy policy</a>.',
+                    button: 'Accept'
+                },
+                de: {
+                    text: 'Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern und den Website-Traffic zu analysieren. Sie können zustimmen, um die besten Funktionen zu nutzen. Mehr erfahren in unserer <a href="#" style="color: #FFFFFF; text-decoration: underline;">Datenschutzerklärung</a>.',
+                    button: 'Akzeptieren'
+                },
+                it: {
+                    text: 'Questo sito utilizza i cookie per migliorare la tua esperienza e analizzare il traffico del sito. Puoi accettare per godere della migliore funzionalità. Scopri di più nella nostra <a href="#" style="color: #FFFFFF; text-decoration: underline;">informativa sulla privacy</a>.',
+                    button: 'Accetta'
+                },
+                fr: {
+                    text: 'Ce site utilise des cookies pour améliorer votre expérience et analyser le trafic du site. Vous pouvez accepter pour profiter de la meilleure fonctionnalité. En savoir plus dans notre <a href="#" style="color: #FFFFFF; text-decoration: underline;">politique de confidentialité</a>.',
+                    button: 'Accepter'
+                }
+            };
+
+            // Detect browser language
+            const userLang = navigator.language.slice(0, 2);
+            const lang = messages[userLang] ? userLang : 'en';
+
+            // Set the text for the cookie banner
+            cookieBanner.querySelector('p').innerHTML = messages[lang].text;
+            acceptButton.textContent = messages[lang].button;
+
             // Check if the user has already accepted cookies
             if (!localStorage.getItem('cookiesAccepted')) {
                 cookieBanner.style.display = 'block';
@@ -106,7 +134,7 @@
     </header>
     <div class="content">
         <h1>tonttu.ai</h1>
-        <button>Get in Touch</button>
+        <button onclick="window.location.href='mailto:sebastian@tonttu.ai?subject=Please%20tell%20me%20more&body=Hi%20Sebastian,%20I%20would%20like%20to%20know%20more%20about%20this%20venture!'">Get in Touch</button>
     </div>
     <footer>
         <div class="social-icons">
@@ -117,8 +145,8 @@
         <p>Copyright &copy; 2024 tonttu.ai – Alle Rechte vorbehalten.</p>
     </footer>
     <div class="cookie-banner" style="display: none;">
-        <p>Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern und den Website-Traffic zu analysieren. Sie können zustimmen, um die besten Funktionen zu nutzen. Mehr erfahren in unserer <a href="#" style="color: #FFFFFF; text-decoration: underline;">Datenschutzerklärung</a>.</p>
-        <button>Akzeptieren</button>
+        <p></p>
+        <button></button>
     </div>
 </body>
 </html>
