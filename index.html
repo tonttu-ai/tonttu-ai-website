@@ -70,6 +70,7 @@
             border: 1px solid #FFFFFF;
             padding: 15px;
             color: #FFFFFF;
+            max-width: 300px;
         }
         .cookie-banner button {
             background-color: transparent;
@@ -77,8 +78,26 @@
             padding: 5px 10px;
             color: #FFFFFF;
             cursor: pointer;
+            margin-top: 10px;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cookieBanner = document.querySelector('.cookie-banner');
+            const acceptButton = cookieBanner.querySelector('button');
+
+            // Check if the user has already accepted cookies
+            if (!localStorage.getItem('cookiesAccepted')) {
+                cookieBanner.style.display = 'block';
+            }
+
+            // Handle cookie acceptance
+            acceptButton.addEventListener('click', function () {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieBanner.style.display = 'none';
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -97,9 +116,9 @@
         </div>
         <p>Copyright &copy; 2024 tonttu.ai – Alle Rechte vorbehalten.</p>
     </footer>
-    <div class="cookie-banner">
-        <p>Diese Website verwendet Cookies.<br>Wir setzen Cookies ein, um den Website-Traffic zu analysieren und dein Nutzererlebnis für diese Website zu optimieren. Wenn du Cookies akzeptierst, werden deine Daten mit denen anderer Nutzer zusammengeführt.</p>
-        <button>Annehmen</button>
+    <div class="cookie-banner" style="display: none;">
+        <p>Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern und den Website-Traffic zu analysieren. Sie können zustimmen, um die besten Funktionen zu nutzen. Mehr erfahren in unserer <a href="#" style="color: #FFFFFF; text-decoration: underline;">Datenschutzerklärung</a>.</p>
+        <button>Akzeptieren</button>
     </div>
 </body>
 </html>
